@@ -1,0 +1,20 @@
+class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+
+
+      def helper(i,a):
+        if a==0:
+          return 1
+        if i==len(coins):
+          return 0
+        if memo[i][a]!=-1:
+          return memo[i][a]
+        if coins[i]>a:
+          memo[i][a]=helper(i+1,a)
+        else:
+          memo[i][a]=helper(i,a-coins[i])+helper(i+1,a)
+        return memo[i][a]
+      memo=[[-1]* (amount+1) for _ in range(len(coins))]
+      return helper(0,amount)
+
+      
