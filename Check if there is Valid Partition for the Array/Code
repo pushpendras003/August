@@ -1,0 +1,25 @@
+class Solution:
+    def validPartition(self, nums: List[int]) -> bool:
+        memo = {}
+        def helper(i):
+            if i == len(nums):
+                return True
+            if i in memo:
+                return memo[i]
+            f = False
+            a = b = False
+            if i + 1 < len(nums) and nums[i] == nums[i + 1]:
+                a = helper(i + 2)
+                f = True
+            if i + 2 < len(nums) and (
+                nums[i] == nums[i + 1] == nums[i + 2] or
+                (nums[i] + 1 == nums[i + 1] and nums[i + 1] + 1 == nums[i + 2])
+            ):
+                b = helper(i + 3)
+                f = True
+            if not f:
+                memo[i] = False
+            else:
+                memo[i] = a or b
+            return memo[i]
+        return helper(0)
