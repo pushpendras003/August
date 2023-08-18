@@ -1,0 +1,18 @@
+class Solution:
+    def maximalNetworkRank(self, n: int, roads: List[List[int]]) -> int:
+      d=defaultdict(list)
+      for i in range(len(roads)):
+        d[roads[i][0]].append(roads[i][1])
+        d[roads[i][1]].append(roads[i][0])
+      l=[]
+      for i in range(n):
+        l.append([i,len(d[i])])
+      ans=0
+      for i in range(n):
+        for j in range(i+1,n):
+          if l[i][0] in d[l[j][0]]:
+            ans=max(ans,l[i][1]+l[j][1]-1)
+          else:
+            ans=max(ans,l[i][1]+l[j][1])
+      return ans 
+      
