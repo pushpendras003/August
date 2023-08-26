@@ -1,0 +1,15 @@
+class Solution:
+    def findLongestChain(self, pairs: List[List[int]]) -> int:
+      l=sorted(pairs,key=lambda x:x[1])
+      def helper(prev,curr,a):
+        if curr==len(l):
+          self.ans=max(self.ans,a)
+          return 
+        if l[prev][1]<l[curr][0]:
+          helper(curr,curr+1,a+1)
+        else:
+          helper(prev,curr+1,a)
+        return
+      self.ans=1
+      helper(0,1,1)
+      return self.ans
