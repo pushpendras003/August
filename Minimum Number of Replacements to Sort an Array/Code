@@ -1,0 +1,12 @@
+class Solution:
+    def minimumReplacement(self, nums: List[int]) -> int:
+      prev=nums[-1]
+      n=len(nums)
+      ans=0
+      for i in range(n-2,-1,-1):
+        num=nums[i]
+        k=ceil(num/prev)
+        ans+=k-1
+        prev=num//k
+      return ans
+        
