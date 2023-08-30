@@ -1,0 +1,19 @@
+class Solution:
+    def minOperations(self, nums: List[int], target: int) -> int:
+      t=sum(nums)
+      
+      if t<target:return -1
+      nums.sort()
+      res=0
+      while target:
+        a=nums.pop()
+        if t-a>=target:
+          t-=a
+        elif a<=target:
+          t-=a
+          target-=a
+        else:
+          nums.append(a//2)
+          nums.append(a//2)
+          res+=1
+      return res
